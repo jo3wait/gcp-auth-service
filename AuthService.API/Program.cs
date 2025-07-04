@@ -1,4 +1,4 @@
-using AuthService.Application.Interfaces;
+ï»¿using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
 using AuthService.Domain;
 using AuthService.Infrastructure.Data;
@@ -42,6 +42,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// è¨»å†Š CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy
+          .WithOrigins("https://image-frontend-821112036618.asia-east1.run.app/")
+          .AllowAnyHeader()
+          .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
@@ -52,9 +64,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseHttpsRedirection();          // ¥u¦b¥»¾÷ dev ±Ò¥Î
+    app.UseHttpsRedirection();          // åªåœ¨æœ¬æ©Ÿ dev å•Ÿç”¨
 }
 app.UseAuthentication();
 app.UseAuthorization();
+// ä½¿ç”¨ CORS
+app.UseCors("FrontendPolicy");
 app.MapControllers();
 app.Run();
