@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-          .WithOrigins("https://image-frontend-821112036618.asia-east1.run.app/")
+          .WithOrigins("https://image-frontend-821112036618.asia-east1.run.app")
           .AllowAnyHeader()
           .AllowAnyMethod();
     });
