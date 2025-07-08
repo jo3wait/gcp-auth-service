@@ -48,7 +48,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-          .WithOrigins("https://image-frontend-821112036618.asia-east1.run.app")
+          .WithOrigins("https://image-frontend-821112036618.asia-east1.run.app",
+                       "https://image-frontend-4sfwixwraa-de.a.run.app")
           .AllowAnyHeader()
           .AllowAnyMethod();
     });
@@ -56,19 +57,19 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 if (app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();          // 只在本機 dev 啟用
 }
-app.UseAuthentication();
-app.UseAuthorization();
 // 使用 CORS
 app.UseCors("FrontendPolicy");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
