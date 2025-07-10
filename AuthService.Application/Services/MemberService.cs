@@ -35,8 +35,8 @@ public class MemberService : IMemberService
         };
 
         await _users.AddAsync(user);
-        var token = _jwt.GenerateToken(user);
-        return new(true, "Registered", token);
+        //var token = _jwt.GenerateToken(user);
+        return new(true, "Registered");
     }
 
     public async Task<AuthResponse> LoginAsync(LoginRequest request)

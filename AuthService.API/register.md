@@ -16,7 +16,7 @@ sequenceDiagram
     AUTH->>KMS: MacSign(hash)
     KMS-->>AUTH: mac + keyVer
     AUTH->>DB: INSERT new user
-    DB-->>AUTH: new user ID
+    DB-->>AUTH: Result
     AUTH-->>NG: 200 OK { succcess: true }
     end
     NG-->>U: Show Result
