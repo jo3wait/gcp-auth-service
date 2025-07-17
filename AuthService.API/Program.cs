@@ -100,7 +100,7 @@ builder.Services
         "accounts.google.com"
       },
           ValidateAudience = true,
-          ValidAudience = builder.Configuration["Google:CloudRunUrl"],
+          ValidAudience = "https://auth-service-821112036618.asia-east1.run.app",
           ValidateLifetime = true,
       };
   });
